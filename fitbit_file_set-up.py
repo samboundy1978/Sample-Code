@@ -59,12 +59,22 @@ print(len(file_types_unique))
 
 #create a .csv file for each type of data file
 for type in file_types_unique:
+    counter = 0 #Need to add a header. .json format is dateTime, value
     for file in os.listdir(path):
-        if type in file:
-            print(file)
-            df = pd.read_json(path+file)
-            df.to_csv('C:/Users/Sam/Desktop/Python/My projects/FitBit/results_'+type+'.csv', mode='a', index=False, header=False)
 
+        if type in file:
+
+            if counter == 0:
+                counter += 1
+                print(file)
+                df = pd.read_json(path+file)
+                df.to_csv('C:/Users/Sam/Desktop/Python/My projects/FitBit/results_' +type +'.csv', mode='a', index=False, header=True) #first file has header
+                #print('0 loop'+str(counter))
+            else:
+                print(file)
+                df = pd.read_json(path + file)
+                df.to_csv('C:/Users/Sam/Desktop/Python/My projects/FitBit/results_' +type +'.csv', mode='a', index=False, header=False) #all subsequent files have no header
+                #print('not 0 loop'+str(counter))
 
 
 
