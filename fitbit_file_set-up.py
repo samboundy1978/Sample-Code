@@ -63,18 +63,20 @@ for type in file_types_unique:
     for file in os.listdir(path):
 
         if type in file:
+            if file.startswith(type): #heart_rate occurs as file type and as a part of some file types so need this to only get heart_rate
 
-            if counter == 0:
-                counter += 1
-                print(file)
-                df = pd.read_json(path+file)
-                df.to_csv('C:/Users/Sam/Desktop/Python/My projects/FitBit/results_' +type +'.csv', mode='a', index=False, header=True) #first file has header
-                #print('0 loop'+str(counter))
-            else:
-                print(file)
-                df = pd.read_json(path + file)
-                df.to_csv('C:/Users/Sam/Desktop/Python/My projects/FitBit/results_' +type +'.csv', mode='a', index=False, header=False) #all subsequent files have no header
-                #print('not 0 loop'+str(counter))
+
+                if counter == 0:
+                    counter += 1
+                    print(file)
+                    df = pd.read_json(path+file)
+                    df.to_csv('C:/Users/Sam/Desktop/Python/My projects/FitBit/results_' +type +'.csv', mode='a', index=False, header=True) #first file has header
+                    #print('0 loop'+str(counter))
+                else:
+                    print(file)
+                    df = pd.read_json(path + file)
+                    df.to_csv('C:/Users/Sam/Desktop/Python/My projects/FitBit/results_' +type +'.csv', mode='a', index=False, header=False) #all subsequent files have no header
+                    #print('not 0 loop'+str(counter))
 
 
 
